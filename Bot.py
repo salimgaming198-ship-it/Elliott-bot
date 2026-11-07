@@ -1,4 +1,13 @@
-import os, time, requests, asyncio, logging
+import os, time, requests, asyncio, loggingimport threading
+from flask import Flask
+app = Flask(__name__)
+@app.route('/')
+def home():
+    return "Bot is alive"
+def run_web():
+    import os
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 10000)))
+threading.Thread(target=run_web, daemon=True).start()
 import numpy as np
 import pandas as pd
 from datetime import datetime
