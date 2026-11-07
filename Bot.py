@@ -303,8 +303,8 @@ async def auto_scan(context: ContextTypes.DEFAULT_TYPE):
             chart = generate_chart(s['df'], s)
             await bot.send_photo(chat_id=int(chat_id), photo=chart, caption=format_signal(s))
         except Exception as e:
-            logger.error(e)
-            def main():
+            logger.error(e)       
+def main():
     try:
         asyncio.set_event_loop(asyncio.new_event_loop())
     except Exception:
