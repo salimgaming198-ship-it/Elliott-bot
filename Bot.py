@@ -304,16 +304,20 @@ async def auto_scan(context: ContextTypes.DEFAULT_TYPE):
             await bot.send_photo(chat_id=int(chat_id), photo=chart, caption=format_signal(s))
         except Exception as e:
             logger.error(e)
+            def main():
+    try:
+        asyncio.set_event_loop(asyncio.new_event_loop())
+    except Exception:
+        pass
 
-def main():
-    app = ApplicationBuilder().token(TOKEN).build()
-    app.add_handler(CommandHandler("start", start))
-    app.add_handler(CommandHandler("scan", scan_cmd))
-    app.add_handler(CommandHandler("top", top_cmd))
-    app.add_handler(CommandHandler("status", status_cmd))
-    app.job_queue.run_repeating(auto_scan, interval=3600, first=30)
+    bot_app = ApplicationBuilder().token(TOKEN).build()
+    bot_app.add_handler(CommandHandler("start", start))
+    bot_app.add_handler(CommandHandler("scan", scan_cmd))
+    bot_app.add_handler(CommandHandler("top", top_cmd))
+    bot_app.add_handler(CommandHandler("status", status_cmd))
+    bot_app.job_queue.run_repeating(auto_scan, interval=3600, first=10)
     print("V1 PRO Started...")
-    app.run_polling()
+    bot_app.run_polling()
 
 if __name__ == "__main__":
     main()
